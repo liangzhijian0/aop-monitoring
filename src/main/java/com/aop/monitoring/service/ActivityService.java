@@ -1,6 +1,7 @@
 package com.aop.monitoring.service;
 
 import com.aop.monitoring.aspect.Monitoring;
+import com.aop.monitoring.aspect.SpecialMonitoringProcessor;
 import com.aop.monitoring.dto.AcitivitySearchCriteria;
 import com.aop.monitoring.dto.ActivityDto;
 import com.aop.monitoring.po.Activity;
@@ -44,6 +45,7 @@ public class ActivityService {
         return true;
     }
 
+    @Monitoring(process = SpecialMonitoringProcessor.class)
     public Activity deleteActivity(String activityId) {
         Activity activity = activityRepository.findById(activityId).orElse(null);
         if (Objects.isNull(activity)) {
